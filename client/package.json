@@ -21,6 +21,7 @@
     "@types/node": "^20.12.12",
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react-dom@rc",
+    "@vercel/speed-insights": "^1.0.12",
     "eslint-plugin-react-compiler": "^0.0.0-experimental-51a85ea-20240601",
     "express": "^4.19.2",
     "prop-types": "^15.8.1",
