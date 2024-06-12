@@ -91,7 +91,6 @@ export default function Register() {
             🔙 Login
           </button>
         </Link>
-
       )}
     </>
   );
@@ -101,7 +100,7 @@ export default function Register() {
 import { useActionState, useRef } from "react";
 import stylex from "@stylexjs/stylex";
 import styles from "../../styles.jsx";
-import { FetchSignUp } from "./FetchSign.server.jsx";
+import { FetchSignUp } from "./FetchSign.Server.jsx";
 
 const stylesRegister = stylex.create({
   form: {
@@ -130,7 +129,7 @@ export default function Register() {
   const formRef = useRef();
 
   async function redirecting(prevState, formData) {
-    "use server";
+    "use Server";
     const email = formData.get("email");
     const password = formData.get("password");
     const username = formData.get("username");
