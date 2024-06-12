@@ -1,14 +1,10 @@
 {
-  "name": "client",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint:all": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "setup": "npm install --dev",
+    "setup": "npm install --legacy-peer-deps",
+    "lint:all": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "code-style-check": "npm run prettier && npm run lint:src",
     "autofix": "npm run lint:fix && npm run prettier:fix",
     "lint:src": "eslint '**/src/**/*.{js,jsx}'",
