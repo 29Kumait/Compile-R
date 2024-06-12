@@ -1,8 +1,9 @@
 import express from "express";
-import { handleSignUp, handleSignIn } from "../controllers/sign.js";
+import { createContent, getContent } from "../controllers/content.js";
 
-const routerSing = express.Router();
+const routerContent = express.Router();
 
-routerSing.post("/signup", handleSignUp);
-routerSing.post("/signin", handleSignIn);
-export default routerSing;
+routerContent.get("/", getContent);
+routerContent.post("/create", createContent);
+
+export default routerContent;

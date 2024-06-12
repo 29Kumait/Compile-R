@@ -4,7 +4,7 @@ import { logInfo, logError } from "./util/logging.js";
 import connectDB from "./db/connectDB.js";
 
 dotenv.config();
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 
 const startServer = async () => {
   try {
@@ -14,4 +14,5 @@ const startServer = async () => {
     logError(error);
   }
 };
+
 startServer();
