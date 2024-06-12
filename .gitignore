@@ -13,4 +13,3 @@ dist
 .env
 NOTES.md
 vite-env.d.ts
-vercel.json
