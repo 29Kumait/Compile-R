@@ -1,8 +1,9 @@
 import express from "express";
-const rootRouter = express.Router();
+import { createContent, getContent } from "../controllers/content.js";
 
-rootRouter.get("/", (req, res) => {
-  res.send("SERVER !");
-});
+const routerContent = express.Router();
 
-export default rootRouter;
+routerContent.get("/", getContent);
+routerContent.post("/create", createContent);
+
+export default routerContent;
