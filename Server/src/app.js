@@ -7,7 +7,17 @@ import routerContent from "./routes/content.js";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// Configure CORS
+app.use(
+  cors({
+    origin: process.env.BASE_CLIENT_URL, //  only client url
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, //  credentials
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  }),
+);
 
 app.use("/", rootRouter);
 app.use("/api", routerSign);
