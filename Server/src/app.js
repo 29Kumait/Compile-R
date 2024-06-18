@@ -10,15 +10,14 @@ app.use(express.json());
 
 const corsOptions = {
   origin: process.env.BASE_CLIENT_URL,
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
   credentials: true,
   preflightContinue: false,
   optionsSuccessStatus: 204,
 };
 
 app.use(cors(corsOptions));
-
-app.options("*", cors(corsOptions)); // Handle preflight requests
+app.options("*", cors(corsOptions));
 
 app.use("/", rootRouter);
 app.use("/api", routerSign);
