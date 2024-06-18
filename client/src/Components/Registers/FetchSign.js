@@ -3,36 +3,38 @@ const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 const FetchSignIn = async (formData) => {
   try {
     const response = await fetch(`${BASE_SERVER_URL}/api/signin`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
+      credentials: "include",
     });
     return await response.json();
   } catch (error) {
-    console.error('Error fetching user data:', error);
+    console.error("Error fetching user data:", error);
   }
 };
 
 async function FetchSignUp(formData) {
   try {
     const response = await fetch(`${BASE_SERVER_URL}/api/signup`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
+      credentials: "include",
     });
 
     if (!response.ok) {
       const errorData = await response.json();
-      return errorData.message || 'An error occurred during registration.';
+      return errorData.message || "An error occurred during registration.";
     }
 
     return response.json();
   } catch (error) {
-    return error.message || 'An error occurred during registration.';
+    return error.message || "An error occurred during registration.";
   }
 }
 

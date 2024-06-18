@@ -8,16 +8,17 @@ import routerContent from "./routes/content.js";
 const app = express();
 app.use(express.json());
 
-// Configure CORS
-app.use(
-  cors({
-    origin: process.env.BASE_CLIENT_URL, //  only client url
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true, //  credentials
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  }),
-);
+const corsOptions = {
+  origin: process.env.BASE_CLIENT_URL,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+
+app.options("*", cors(corsOptions)); // Handle preflight requests
 
 app.use("/", rootRouter);
 app.use("/api", routerSign);
