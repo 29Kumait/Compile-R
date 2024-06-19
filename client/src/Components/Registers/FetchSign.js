@@ -1,29 +1,33 @@
+// FetchSign.js
+
 const baseUrl = import.meta.env.VITE_BASE_SERVER_URL;
 console.log("Base URL:", baseUrl);
 
-const fetchContentList = async () => {
-  const response = await fetch(`${baseUrl}/api`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-  });
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
-  return response.json();
-};
-
-const fetchCreateContent = async (contentData) => {
-  const response = await fetch(`${baseUrl}/api/create`, {
+const FetchSignUp = async (userInfo) => {
+  const response = await fetch(`${baseUrl}/api/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(contentData),
+    body: JSON.stringify(userInfo),
+    credentials: "include", // Add this line if you're using credentials
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
+};
+
+const FetchSignIn = async (credentials) => {
+  const response = await fetch(`${baseUrl}/api/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify(credentials),
     credentials: "include",
   });
 
@@ -34,4 +38,4 @@ const fetchCreateContent = async (contentData) => {
   return response.json();
 };
 
-export { fetchCreateContent, fetchContentList };
+export { FetchSignIn, FetchSignUp };
