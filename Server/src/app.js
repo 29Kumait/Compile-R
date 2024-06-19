@@ -1,36 +1,27 @@
 import express from "express";
 import cors from "cors";
-import { logError } from "./util/logging.js";
-import rootRouter from "./routes/root.js";
-import routerSign from "./routes/sign.js";
-import routerContent from "./routes/content.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
+
 app.use(express.json());
+app.use(
+  cors({
+    origin: "https://compile-r-client.vercel.app", // Allow this origin
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 
-const corsOptions = {
-  origin: ["https://compile-r-client.vercel.app"],
-  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
-  credentials: true,
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-};
+// Routes
+import signRoutes from "./routes/sign.js";
+import contentRoutes from "./routes/content.js";
+import rootRoutes from "./routes/root.js";
 
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
-
-app.use("/", rootRouter);
-app.use("/api", routerSign);
-app.use("/api", routerContent);
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  logError(err);
-  if (err.name === "SyntaxError") {
-    res.status(400).send({ error: "Invalid JSON payload" });
-  } else {
-    res.status(500).send("ERROR handling middleware!");
-  }
-});
+app.use("/api/sign", signRoutes);
+app.use("/api/content", contentRoutes);
+app.use("/", rootRoutes);
 
 export default app;
