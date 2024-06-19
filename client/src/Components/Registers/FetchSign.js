@@ -2,7 +2,7 @@ const baseUrl = import.meta.env.VITE_BASE_SERVER_URL;
 console.log("Base URL:", baseUrl);
 
 const FetchSignUp = async (userInfo) => {
-  const response = await fetch(`${baseUrl}/api/signup`, {
+  const response = await fetch(`${baseUrl}/api/sign/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -18,7 +18,7 @@ const FetchSignUp = async (userInfo) => {
 };
 
 const FetchSignIn = async (credentials) => {
-  const response = await fetch(`${baseUrl}/api/signin`, {
+  const response = await fetch(`${baseUrl}/api/sign/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
