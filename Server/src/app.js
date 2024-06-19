@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-  origin: process.env.BASE_CLIENT_URL,
+  origin: ["https://compile-r-client.vercel.app"],
   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
   credentials: true,
   preflightContinue: false,
@@ -26,7 +26,11 @@ app.use("/api", routerContent);
 // Error handling middleware
 app.use((err, req, res, next) => {
   logError(err);
-  res.status(500).send("ERROR handling middleware!");
+  if (err.name === "SyntaxError") {
+    res.status(400).send({ error: "Invalid JSON payload" });
+  } else {
+    res.status(500).send("ERROR handling middleware!");
+  }
 });
 
 export default app;
