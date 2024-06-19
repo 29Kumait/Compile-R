@@ -1,41 +1,34 @@
-const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
+const baseUrl = import.meta.env.VITE_BASE_SERVER_URL;
+const FetchSignUp = async (userInfo) => {
+  const response = await fetch(`${baseUrl}/api/sign/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userInfo),
+  });
 
-const FetchSignIn = async (formData) => {
-  try {
-    const response = await fetch(`${BASE_SERVER_URL}/api/signin`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-      credentials: "include",
-    });
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching user data:", error);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
+
+  return response.json();
 };
 
-async function FetchSignUp(formData) {
-  try {
-    const response = await fetch(`${BASE_SERVER_URL}/api/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-      credentials: "include",
-    });
+const FetchSignIn = async (credentials) => {
+  const response = await fetch(`${baseUrl}/api/sign/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      return errorData.message || "An error occurred during registration.";
-    }
-
-    return response.json();
-  } catch (error) {
-    return error.message || "An error occurred during registration.";
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
-}
+
+  return response.json();
+};
 
 export { FetchSignIn, FetchSignUp };
