@@ -1,6 +1,7 @@
 // FetchContent.js
 
 const baseUrl = import.meta.env.VITE_BASE_SERVER_URL;
+console.log("Base URL:", baseUrl);
 
 const fetchContentList = async () => {
   const response = await fetch(`${baseUrl}/api/content`, {
