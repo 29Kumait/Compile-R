@@ -4,7 +4,9 @@ import react from "@vitejs/plugin-react";
 
 const ReactCompilerConfig = {};
 
+// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
+  // Load environment variables based on the current mode (e.g., 'development' or 'production')
   const env = loadEnv(mode, process.cwd(), "");
 
   return {

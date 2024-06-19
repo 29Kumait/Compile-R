@@ -1,4 +1,7 @@
+// FetchSign.js
+
 const baseUrl = import.meta.env.VITE_BASE_SERVER_URL;
+
 const FetchSignUp = async (userInfo) => {
   const response = await fetch(`${baseUrl}/api/sign/signup`, {
     method: "POST",
