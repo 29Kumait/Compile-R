@@ -1,15 +1,13 @@
-// FetchSign.js
-
 const baseUrl = import.meta.env.VITE_BASE_SERVER_URL;
 console.log("Base URL:", baseUrl);
 
-const FetchSignUp = async (userInfo) => {
-  const response = await fetch(`${baseUrl}/api/signup`, {
-    method: "POST",
+const fetchContentList = async () => {
+  const response = await fetch(`${baseUrl}/api`, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(userInfo),
+    credentials: "include",
   });
 
   if (!response.ok) {
@@ -19,13 +17,14 @@ const FetchSignUp = async (userInfo) => {
   return response.json();
 };
 
-const FetchSignIn = async (credentials) => {
-  const response = await fetch(`${baseUrl}/api/signin`, {
+const fetchCreateContent = async (contentData) => {
+  const response = await fetch(`${baseUrl}/api/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(credentials),
+    body: JSON.stringify(contentData),
+    credentials: "include",
   });
 
   if (!response.ok) {
@@ -35,4 +34,4 @@ const FetchSignIn = async (credentials) => {
   return response.json();
 };
 
-export { FetchSignIn, FetchSignUp };
+export { fetchCreateContent, fetchContentList };
