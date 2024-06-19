@@ -4,7 +4,7 @@ const baseUrl = import.meta.env.VITE_BASE_SERVER_URL;
 console.log("Base URL:", baseUrl);
 
 const fetchContentList = async () => {
-  const response = await fetch(`${baseUrl}/api/content`, {
+  const response = await fetch(`${baseUrl}/api`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -19,7 +19,7 @@ const fetchContentList = async () => {
 };
 
 const fetchCreateContent = async (contentData) => {
-  const response = await fetch(`${baseUrl}/api/content/create`, {
+  const response = await fetch(`${baseUrl}/api/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
