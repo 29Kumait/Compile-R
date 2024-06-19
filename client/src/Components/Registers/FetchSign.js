@@ -8,7 +8,6 @@ const FetchSignUp = async (userInfo) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(userInfo),
-    credentials: "include", // Add this line if you're using credentials
   });
 
   if (!response.ok) {
@@ -24,9 +23,7 @@ const FetchSignIn = async (credentials) => {
     headers: {
       "Content-Type": "application/json",
     },
-
     body: JSON.stringify(credentials),
-    credentials: "include",
   });
 
   if (!response.ok) {
