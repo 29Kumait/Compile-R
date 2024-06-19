@@ -23,6 +23,7 @@ app.use("/", rootRouter);
 app.use("/api", routerSign);
 app.use("/api", routerContent);
 
+// Error handling middleware
 app.use((err, req, res, next) => {
   logError(err);
   res.status(500).send("ERROR handling middleware!");
