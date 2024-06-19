@@ -1,37 +1,45 @@
-// FetchContent.js
+const BASE_SERVER_URL = import.meta.env.VITE_BASE_SERVER_URL;
 
-const baseUrl = import.meta.env.VITE_BASE_SERVER_URL;
-console.log("Base URL:", baseUrl);
+const fetchCreateContent = async ({ description }) => {
+  try {
+    const response = await fetch(`${BASE_SERVER_URL}/api/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ description }),
+    });
 
-const fetchContentList = async () => {
-  const response = await fetch(`${baseUrl}/api`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+    if (!response.ok) {
+      const errorData = await response.json();
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+      return errorData.message || "An error occurred while saving content.";
+    }
+
+    return await response.json();
+  } catch (error) {
+    return error.message || "An error occurred while saving content.";
   }
-
-  return response.json();
 };
 
-const fetchCreateContent = async (contentData) => {
-  const response = await fetch(`${baseUrl}/api/create`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(contentData),
-  });
+const fetchContentList = async () => {
+  try {
+    const response = await fetch(`${BASE_SERVER_URL}/api`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+    if (!response.ok) {
+      const errorData = await response.json();
+      return errorData.message || "An error occurred while fetching content.";
+    }
+
+    return await response.json();
+  } catch (error) {
+    return error.message || "An error occurred while fetching content.";
   }
-
-  return response.json();
 };
 
 export { fetchCreateContent, fetchContentList };
