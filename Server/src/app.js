@@ -1,27 +1,22 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
-
-dotenv.config();
+import { logError } from "./util/logging.js";
+import rootRouter from "./routes/root.js";
+import routerSign from "./routes/sign.js";
+import routerContent from "./routes/content.js";
 
 const app = express();
-
 app.use(express.json());
-app.use(
-  cors({
-    origin: "https://compile-r-client.vercel.app", // Allow this origin
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }),
-);
+app.use(cors());
 
-// Routes
-import signRoutes from "./routes/sign.js";
-import contentRoutes from "./routes/content.js";
-import rootRoutes from "./routes/root.js";
+app.use("/", rootRouter);
+app.use("/api", routerSign);
+app.use("/api", routerContent);
 
-app.use("/api/sign", signRoutes);
-app.use("/api/content", contentRoutes);
-app.use("/", rootRoutes);
+// Error handling middleware
+app.use((err, req, res, next) => {
+  logError(err);
+  res.status(500).send("ERROR handling middleware!");
+});
 
 export default app;
